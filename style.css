@@ -1,4 +1,54 @@
-.greeting {
-  font-size: 45px;
-  color: blue;
+#hero-one {
+  background-image: url(https://picsum.photos/800);
+}
+
+#hero-two {
+  background-image: url(https://picsum.photos/801);
+}
+
+#hero-three {
+  background-image: url(https://picsum.photos/759);
+}
+
+.hero {
+  height: 500px;
+  background-size: cover;
+  background-position: center bottom;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.black-transparent {
+  border-top: 2px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 200px;
+}
+
+.hero-descriptor {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
+
+.hero-text {
+  width: 100%;
+}
+
+.hero-text h6 {
+  line-height: 18px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
+.radio-buttons {
+  height: 50%;
+}
+
+.radio-buttons input {
+  margin-left: 20px;
 }
