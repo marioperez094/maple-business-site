@@ -1,8 +1,4 @@
 /* General */
-body {
-  background-color: #802e0a !important;
-}
-
 .container-fluid {
   max-width: 1250px
 }
@@ -21,7 +17,7 @@ nav:before {
   opacity: 1;
   height: 100%;
   width: 100%;
-  background: url(https://c0.wallpaperflare.com/preview/415/35/767/background-burnt-damaged-grunge.jpg);
+  background-color: #8A6645;
 }
 
 .navbar .container-fluid {
@@ -168,8 +164,8 @@ footer {
 }
 
 .inventory-list {
-  background-color: white;
-  padding: 10px 0 0 10px;
+  background-color: blue;
+  padding: 100px 0 0 10px;
   border-radius: 10px;
 }
 

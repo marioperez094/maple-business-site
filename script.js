@@ -1,3 +1,5 @@
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5,13 +7,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Router = ReactRouterDOM.HashRouter;
-var _ReactRouterDOM = ReactRouterDOM,
-    Route = _ReactRouterDOM.Route,
-    Link = _ReactRouterDOM.Link,
-    Switch = _ReactRouterDOM.Switch;
-
 
 var services = [{
   id: 'MM-IN',
@@ -281,7 +276,16 @@ var services = [{
   tags: ['food', 'stands']
 }];
 
+var Router = ReactRouterDOM.HashRouter;
+var _ReactRouterDOM = ReactRouterDOM,
+    Route = _ReactRouterDOM.Route,
+    Link = _ReactRouterDOM.Link,
+    Switch = _ReactRouterDOM.Switch;
+var _React = React,
+    useState = _React.useState;
+
 //Layout
+
 var Layout = function Layout(props) {
   var language = props.language,
       languageChange = props.languageChange;
@@ -300,8 +304,8 @@ var Layout = function Layout(props) {
       'es': 'Renta'
     },
     footerAbout: {
-      'en': 'About',
-      'es': 'Sobre'
+      'en': 'About us',
+      'es': 'Sobre nosotros'
     },
     footerInflatables: {
       'en': 'Inflatables',
@@ -397,7 +401,7 @@ var Layout = function Layout(props) {
     props.children,
     React.createElement(
       'footer',
-      { className: 'p-3 text-center' },
+      { className: 'mt-3 p-3 text-center' },
       React.createElement(
         'div',
         { className: 'container-fluid' },
@@ -467,7 +471,7 @@ var Layout = function Layout(props) {
   );
 };
 
-//Hero
+//Hero 
 
 var Hero = function (_React$Component) {
   _inherits(Hero, _React$Component);
@@ -605,116 +609,78 @@ var Inventory = function Inventory(props) {
 };
 
 //Home
+var Home = function Home(props) {
+  var language = props.language;
 
-var Home = function (_React$Component2) {
-  _inherits(Home, _React$Component2);
+  var slogan = {
+    'en': 'Turn every party into an adventure!',
+    'es': 'Haz cada fiesta una aventura!'
+  };
 
-  function Home() {
-    _classCallCheck(this, Home);
-
-    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
-  }
-
-  _createClass(Home, [{
-    key: 'render',
-    value: function render() {
-      var language = this.props.language;
-
-      var slogan = {
-        'en': 'We set up, you enjoy!',
-        'es': 'Nosotros lo instalamos, y ustedes los disfrutan!'
-      };
-      return React.createElement(
-        React.Fragment,
-        null,
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement(
+      'div',
+      { className: 'container-fluid' },
+      React.createElement(Hero, { language: language }),
+      React.createElement(
+        'div',
+        { className: 'mt-5 southern-text slogan' },
         React.createElement(
-          'div',
-          { className: 'container-fluid' },
-          React.createElement(Hero, { language: language })
-        ),
-        React.createElement(
-          'div',
-          { className: 'text-center mt-5 southern-text slogan' },
-          React.createElement(
-            'h4',
-            null,
-            slogan[language]
-          )
-        ),
-        React.createElement(
-          'div',
-          { className: 'container-fluid inventory mt-5' },
-          React.createElement(
-            'div',
-            { className: 'inventory-list row d-flex justify-content-between' },
-            React.createElement(Inventory, { inventoryImage: 'inventory-one', inventoryText: language === 'es' ? 'Inflables' : 'Inflatables' }),
-            React.createElement(Inventory, { inventoryImage: 'inventory-two', inventoryText: 'Water Slides' }),
-            React.createElement(Inventory, { inventoryImage: 'inventory-three', inventoryText: language === 'es' ? 'Taquiza' : 'Taco Stand' })
-          )
+          'h4',
+          { className: 'ps-5' },
+          slogan[language]
         )
-      );
-    }
-  }]);
-
-  return Home;
-}(React.Component);
+      )
+    ),
+    React.createElement(
+      'div',
+      { className: 'container-fluid inventory mt-5' },
+      React.createElement(
+        'div',
+        { className: 'inventory-list row d-flex justify-content-between' },
+        React.createElement(Inventory, { inventoryImage: 'inventory-one', inventoryText: language === 'es' ? 'Inflables' : 'Inflatables' }),
+        React.createElement(Inventory, { inventoryImage: 'inventory-two', inventoryText: 'Water Slides' }),
+        React.createElement(Inventory, { inventoryImage: 'inventory-three', inventoryText: language === 'es' ? 'Taquiza' : 'Taco Stand' })
+      )
+    )
+  );
+};
 
 //Output
+var App = function App() {
+  var _useState = useState('es'),
+      _useState2 = _slicedToArray(_useState, 2),
+      language = _useState2[0],
+      setLanguague = _useState2[1];
 
+  var changeLanguage = function changeLanguage(e) {
+    setLanguague(e.target.value);
+  };
 
-var App = function (_React$Component3) {
-  _inherits(App, _React$Component3);
-
-  function App(props) {
-    _classCallCheck(this, App);
-
-    var _this4 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-
-    _this4.state = {
-      language: 'es'
-    };
-
-    _this4.languageChange = _this4.languageChange.bind(_this4);
-    return _this4;
-  }
-
-  _createClass(App, [{
-    key: 'languageChange',
-    value: function languageChange(event) {
-      this.setState({ language: event.target.getAttribute('data-value') });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var language = this.state.language;
-
-
-      return React.createElement(
-        Router,
+  return React.createElement(
+    Router,
+    null,
+    React.createElement(
+      Layout,
+      { language: language, languageChange: changeLanguage },
+      React.createElement(
+        Switch,
         null,
-        React.createElement(
-          Layout,
-          { language: language, languageChange: this.languageChange },
-          React.createElement(
-            Switch,
-            null,
-            React.createElement(Route, { path: '/', exact: true, render: function render(props) {
-                return React.createElement(Home, Object.assign({}, props, { language: language }));
-              } }),
-            React.createElement(Route, { render: function render() {
-                return React.createElement(
-                  'h1',
-                  null,
-                  '404 Not found'
-                );
-              } })
-          )
-        )
-      );
-    }
-  }]);
+        React.createElement(Route, { path: '/', exact: true, render: function render(props) {
+            return React.createElement(Home, Object.assign({}, props, { language: language }));
+          } }),
+        React.createElement(Route, { render: function render() {
+            return React.createElement(
+              'h1',
+              null,
+              '404 Not found'
+            );
+          } })
+      )
+    )
+  );
+};
 
-  return App;
-}(React.Component);
-
-ReactDOM.render(React.createElement(App, null), document.querySelector('#root'));
+ReactDOM.render(React.createElement(App, null), document.getElementById('root'));

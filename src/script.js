@@ -1,6 +1,3 @@
-const Router = ReactRouterDOM.HashRouter;
-const { Route, Link, Switch } = ReactRouterDOM;
-
 const services = [{
   id: 'MM-IN',
   name: {
@@ -56,7 +53,7 @@ const services = [{
   price: '$185',
   image: '',
   dimensions: '13.5ft x 21.5ft',
-  tags: ['inflatable', 'large', 'covered', 'slide' ],
+  tags: ['inflatable', 'large', 'covered', 'slide'],
 }, {
   id: 'UP-IN',
   name: {
@@ -269,6 +266,11 @@ const services = [{
   tags: ['food', 'stands'],
 },]
 
+const Router = ReactRouterDOM.HashRouter;
+const { Route, Link, Switch } = ReactRouterDOM;
+const { useState } = React;
+
+
 //Layout
 const Layout = (props) => {
   const { language, languageChange } = props
@@ -286,8 +288,8 @@ const Layout = (props) => {
       'es': 'Renta'
     },
     footerAbout: {
-      'en': 'About',
-      'es': 'Sobre'
+      'en': 'About us',
+      'es': 'Sobre nosotros'
     },
     footerInflatables: {
       'en': 'Inflatables',
@@ -320,11 +322,11 @@ const Layout = (props) => {
                 </Link>
                 <ul className='dropdown-menu'>
                   <li>
-                    <Link data-value='en' onClick={(e) => languageChange(e)}className='dropdown-item' to='/'>
+                    <Link data-value='en' onClick={(e) => languageChange(e)} className='dropdown-item' to='/'>
                       English
                     </Link>
                     <Link data-value='es' onClick={(e) => languageChange(e)}
-                    className='dropdown-item' to='/'>
+                      className='dropdown-item' to='/'>
                       Espanol
                     </Link>
                   </li>
@@ -337,8 +339,8 @@ const Layout = (props) => {
       </nav>
 
       {props.children}
-      
-      <footer className='p-3 text-center'>
+
+      <footer className='mt-3 p-3 text-center'>
         <div className='container-fluid'>
           <div className='row southern-text'>
             <div className='col-3'>
@@ -367,7 +369,7 @@ const Layout = (props) => {
   )
 }
 
-//Hero
+//Hero 
 class Hero extends React.Component {
   constructor(props) {
     super(props);
@@ -378,14 +380,14 @@ class Hero extends React.Component {
       dots: [true, false, false]
     }
   }
-  
+
   componentDidMount() {
-    if(!this.heroTimer)
-    this.heroTimer = setInterval(() => { this.heroSlider(this.state.count) }, 10000)
+    if (!this.heroTimer)
+      this.heroTimer = setInterval(() => { this.heroSlider(this.state.count) }, 10000)
   }
 
   componentWillUnmount() {
-    if(this.heroTimer) {
+    if (this.heroTimer) {
       window.clearInterval(this.heroTimer);
     }
   }
@@ -393,7 +395,7 @@ class Hero extends React.Component {
   heroSlider = (num) => {
     num++
     let setDots = [0, 1, 2];
-    this.setState({count: num, dots: setDots.map((val) => {return val === num % this.state.frontPageInflatables.length})})
+    this.setState({ count: num, dots: setDots.map((val) => { return val === num % this.state.frontPageInflatables.length }) })
 
   }
 
@@ -402,14 +404,14 @@ class Hero extends React.Component {
     const dataValue = e.target.getAttribute('data-value');
     this.heroSlider(dataValue)
   }
-  
+
   render() {
     const { language } = this.props;
     const { frontPageInflatables, count, dots } = this.state
     const { name, description, image } = frontPageInflatables[count % frontPageInflatables.length]
 
 
-    
+
     return (
       <div className='row flex-nowrap scrollable-row'>
         <div className='col-12' id='fadeAnimation' key={image}>
@@ -437,13 +439,13 @@ class Hero extends React.Component {
 const Inventory = (props) => {
   const { inventoryImage, inventoryText } = props;
 
-  return(
+  return (
     <div className='col-12 col-md-4'>
       <div className='holder'>
-        <div className='inventory-1' id={ inventoryImage }>
+        <div className='inventory-1' id={inventoryImage}>
         </div>
         <div className='white-holder text-center'>
-          <h3>{ inventoryText }</h3>
+          <h3>{inventoryText}</h3>
         </div>
       </div>
     </div>
@@ -451,62 +453,53 @@ const Inventory = (props) => {
 }
 
 //Home
-class Home extends React.Component {
-  render() {
-    const { language } = this.props;
-    const slogan = {
-      'en': 'We set up, you enjoy!',
-      'es': 'Nosotros lo instalamos, y ustedes los disfrutan!',
-    }
-    return (
-      <React.Fragment>
-        <div className='container-fluid'>
-          <Hero language={ language }/>
-        </div>
-        <div className='text-center mt-5 southern-text slogan'>
-          <h4>{slogan[language]}</h4>
-        </div>
-        <div className='container-fluid inventory mt-5'>
-          <div className='inventory-list row d-flex justify-content-between'>
-            <Inventory inventoryImage='inventory-one' inventoryText={language === 'es' ? 'Inflables' : 'Inflatables'} />
-            <Inventory inventoryImage='inventory-two' inventoryText='Water Slides' />
-            <Inventory inventoryImage='inventory-three' inventoryText={language === 'es' ? 'Taquiza' : 'Taco Stand'} />
-          </div>
-        </div>
-      </React.Fragment>
-    )
+const Home = (props) => {
+  const { language } = props;
+  const slogan = {
+    'en': 'Turn every party into an adventure!',
+    'es': 'Haz cada fiesta una aventura!'
   }
+
+  return (
+    <React.Fragment>
+      <div className='container-fluid'>
+        <Hero language={ language } />
+        <div className='mt-5 southern-text slogan'>
+          <h4 className='ps-5'>{slogan[language]}</h4>
+        </div>
+      </div>
+      <div className='container-fluid inventory mt-5'>
+        <div className='inventory-list row d-flex justify-content-between'>
+          <Inventory inventoryImage='inventory-one' inventoryText={language === 'es' ? 'Inflables' : 'Inflatables'} />
+          <Inventory inventoryImage='inventory-two' inventoryText='Water Slides' />
+          <Inventory inventoryImage='inventory-three' inventoryText={language === 'es' ? 'Taquiza' : 'Taco Stand'} />
+        </div>
+      </div>
+    </React.Fragment>
+  )
 }
 
 //Output
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      language: 'es'
-    };
+const App = () => {
+  const [language, setLanguague] = useState('es');
 
-    this.languageChange = this.languageChange.bind(this);
+  const changeLanguage = (e) => {
+    setLanguague(e.target.value)
   }
 
-  languageChange(event) {
-    this.setState({ language: event.target.getAttribute('data-value') })
-  }
-
-  render() {
-    const { language } = this.state;
-
-    return (
-      <Router>
-        <Layout language={language} languageChange={this.languageChange}>
-          <Switch>
-            <Route path="/" exact render={ (props) => <Home {...props} language={ language } />} />
-            <Route render={() => <h1>404 Not found</h1>} />
-          </Switch>
-        </Layout>
-      </Router>
-    )
-  }
+  return (
+    <Router>
+      <Layout language={ language } languageChange={ changeLanguage }>
+        <Switch>
+          <Route path="/" exact render={(props) => <Home {...props} language={language} />} />
+          <Route render={() => <h1>404 Not found</h1>} />
+        </Switch>
+      </Layout>
+    </Router>
+  )
 }
 
-ReactDOM.render(<App />, document.querySelector('#root'));
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
