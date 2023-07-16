@@ -26,7 +26,7 @@ var services = [{
   price: '$125',
   image: 'hero-one',
   dimensions: '13.5ft x 13.5ft',
-  tags: ['inflatable', 'medium', 'covered', 'hoop']
+  tags: ['inflatable', 'medium', 'covered', 'hoop', 'frontPage']
 }, {
   id: 'SM-IN',
   name: {
@@ -40,7 +40,7 @@ var services = [{
   price: '$125',
   image: 'hero-two',
   dimensions: '13.5ft x 13.5ft',
-  tags: ['inflatable', 'medium', 'covered', 'hoop']
+  tags: ['inflatable', 'medium', 'covered', 'hoop', 'frontPage']
 }, {
   id: 'US-IN',
   name: {
@@ -49,12 +49,12 @@ var services = [{
   },
   description: {
     'en': 'Enter a magical land in this small but elegant unicorn themed inflatable.',
-    'es': 'Entra en una tierra magica en este pequeno pero elegante inflable unicornio.'
+    'es': 'Entra una tierra magica en este pequeno pero elegante inflable unicornio.'
   },
   price: '$100',
   image: 'hero-three',
   dimensions: '9.5ft x 9.5ft',
-  tags: ['inflatable', 'small', 'uncovered', 'slide']
+  tags: ['inflatable', 'small', 'uncovered', 'slide', 'frontPage']
 }, {
   id: 'UC-IN',
   name: {
@@ -110,7 +110,7 @@ var services = [{
   price: '$150/$200',
   image: '',
   dimensions: '15ft x 17ft',
-  tags: ['inflatable', 'medium', 'large', 'uncovered', 'slide', 'waterSlide']
+  tags: ['inflatable', 'medium', 'large', 'uncovered', 'slide', 'water-slide']
 }, {
   id: 'PP-IN',
   name: {
@@ -138,7 +138,7 @@ var services = [{
   price: '$200',
   image: '',
   dimensions: '18ft x 19ft',
-  tags: ['inflatable', 'large', 'covered', 'slide', 'waterSlide']
+  tags: ['inflatable', 'large', 'covered', 'slide', 'water-slide']
 }, {
   id: 'CW-WS',
   name: {
@@ -152,7 +152,7 @@ var services = [{
   price: '$200',
   image: '',
   dimensions: 'W:13.5ft x L:21.5ft x H:15ft',
-  tags: ['inflatable', 'large', 'uncovered', 'slide', 'waterSlide']
+  tags: ['inflatable', 'large', 'uncovered', 'slide', 'water-slide']
 }, {
   id: 'OW-WS',
   name: {
@@ -166,7 +166,7 @@ var services = [{
   price: '$225',
   image: '',
   dimensions: 'W:9ft10i x L:23.7ft x H:14ft',
-  tags: ['inflatable', 'large', 'uncovered', 'slide', 'waterSlide']
+  tags: ['inflatable', 'large', 'uncovered', 'slide', 'water-slide']
 }, {
   id: 'DW-WS',
   name: {
@@ -180,7 +180,7 @@ var services = [{
   price: '$275',
   image: '',
   dimensions: 'W:16.5ft x L:32.2ft x H:26.3ft',
-  tags: ['inflatable', 'x-large', 'uncovered', 'slide', 'waterSlide']
+  tags: ['inflatable', 'x-large', 'uncovered', 'slide', 'water-slide']
 }, {
   id: 'TNT-SP',
   name: {
@@ -294,6 +294,18 @@ var Layout = function Layout(props) {
     navLngSelect: {
       'en': 'Language',
       'es': 'Idioma'
+    },
+    navServices: {
+      'en': 'Rentals',
+      'es': 'Renta'
+    },
+    footerAbout: {
+      'en': 'About',
+      'es': 'Sobre'
+    },
+    footerInflatables: {
+      'en': 'Inflatables',
+      'es': 'Inflables'
     }
   };
 
@@ -302,10 +314,11 @@ var Layout = function Layout(props) {
     null,
     React.createElement(
       'nav',
-      { className: 'navbar navbar-expand-lg bg-light' },
+      { className: 'navbar navbar-expand-lg' },
+      React.createElement('div', { className: 'left-rounded-corner' }),
       React.createElement(
         'div',
-        { className: 'container' },
+        { className: 'container-fluid' },
         React.createElement(
           Link,
           { className: 'navbar-brand', to: '/' },
@@ -333,6 +346,15 @@ var Layout = function Layout(props) {
                 Link,
                 { className: 'nav-link', to: '/' },
                 navItems.navHome[language]
+              )
+            ),
+            React.createElement(
+              'li',
+              { className: 'nav-item' },
+              React.createElement(
+                Link,
+                { className: 'nav-link', to: '/' },
+                navItems.navServices[language]
               )
             ),
             React.createElement(
@@ -369,22 +391,75 @@ var Layout = function Layout(props) {
             )
           )
         )
-      )
+      ),
+      React.createElement('div', { className: 'right-rounded-corner' })
     ),
     props.children,
     React.createElement(
       'footer',
-      { className: 'p-3 bg-light text-center' },
+      { className: 'p-3 text-center' },
       React.createElement(
         'div',
-        { className: 'container' },
+        { className: 'container-fluid' },
         React.createElement(
           'div',
-          { className: '', id: 'legal' },
+          { className: 'row southern-text' },
           React.createElement(
-            'span',
-            null,
-            '\xA92023 Mario Perez'
+            'div',
+            { className: 'col-3' },
+            React.createElement(
+              'h3',
+              null,
+              navItems.footerAbout[language]
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-3' },
+            React.createElement(
+              'h3',
+              null,
+              navItems.footerInflatables[language]
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-3' },
+            React.createElement(
+              'h3',
+              null,
+              navItems.footerAbout[language]
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-3' },
+            React.createElement(
+              'h3',
+              null,
+              navItems.footerAbout[language]
+            )
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'row' },
+          React.createElement(
+            'div',
+            { className: 'col-12' },
+            React.createElement(
+              'div',
+              { className: '', id: 'legal' },
+              React.createElement(
+                'span',
+                null,
+                React.createElement(
+                  'small',
+                  null,
+                  '\xA92023 Mario Perez'
+                )
+              )
+            )
           )
         )
       )
@@ -402,9 +477,27 @@ var Hero = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Hero.__proto__ || Object.getPrototypeOf(Hero)).call(this, props));
 
+    _this.heroSlider = function (num) {
+      num++;
+      var setDots = [0, 1, 2];
+      _this.setState({ count: num, dots: setDots.map(function (val) {
+          return val === num % _this.state.frontPageInflatables.length;
+        }) });
+    };
+
+    _this.getDV = function (e) {
+      window.clearInterval(_this.heroTimer);
+      var dataValue = e.target.getAttribute('data-value');
+      _this.heroSlider(dataValue);
+    };
+
     _this.state = {
+      heroTimer: null,
       count: 0,
-      currentlyShowing: services[0]
+      frontPageInflatables: services.filter(function (inflatables) {
+        return inflatables.tags.includes('frontPage');
+      }),
+      dots: [true, false, false]
     };
     return _this;
   }
@@ -414,31 +507,37 @@ var Hero = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      setInterval(function () {
-        _this2.changeHero(_this2.state.count);
-      }, 5000);
+      if (!this.heroTimer) this.heroTimer = setInterval(function () {
+        _this2.heroSlider(_this2.state.count);
+      }, 10000);
     }
   }, {
-    key: 'changeHero',
-    value: function changeHero(count) {
-      console.log(count);
-      this.setState({ count: count + 1, currentlyShowing: services[count % 3] });
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      if (this.heroTimer) {
+        window.clearInterval(this.heroTimer);
+      }
     }
   }, {
     key: 'render',
     value: function render() {
-      var currentlyShowing = this.state.currentlyShowing;
-      var name = currentlyShowing.name,
-          description = currentlyShowing.description,
-          image = currentlyShowing.image;
       var language = this.props.language;
+      var _state = this.state,
+          frontPageInflatables = _state.frontPageInflatables,
+          count = _state.count,
+          dots = _state.dots;
+      var _frontPageInflatables = frontPageInflatables[count % frontPageInflatables.length],
+          name = _frontPageInflatables.name,
+          description = _frontPageInflatables.description,
+          image = _frontPageInflatables.image;
+
 
       return React.createElement(
         'div',
-        { className: 'row' },
+        { className: 'row flex-nowrap scrollable-row' },
         React.createElement(
           'div',
-          { className: 'col-12' },
+          { className: 'col-12', id: 'fadeAnimation', key: image },
           React.createElement(
             'div',
             { className: 'd-flex align-items-end hero', id: image },
@@ -453,21 +552,21 @@ var Hero = function (_React$Component) {
                   { className: 'hero-text d-inline text-start' },
                   React.createElement(
                     'h5',
-                    null,
+                    { className: 'southern-text' },
                     name[language]
                   ),
                   React.createElement(
                     'h6',
                     { className: 'pt-2' },
                     description[language]
+                  ),
+                  React.createElement(
+                    'div',
+                    { className: 'radio-buttons d-flex justify-content-center align-items-end' },
+                    React.createElement('span', { className: dots[0] ? 'active-dot' : 'dot', 'data-value': '-1', onClick: this.getDV }),
+                    React.createElement('span', { className: dots[1] ? ' active-dot' : 'dot', 'data-value': '0', onClick: this.getDV }),
+                    React.createElement('span', { className: dots[2] ? 'active-dot' : 'dot', 'data-value': '1', onClick: this.getDV })
                   )
-                ),
-                React.createElement(
-                  'div',
-                  { className: 'radio-buttons d-flex justify-content-center align-items-end' },
-                  React.createElement('input', { type: 'radio' }),
-                  React.createElement('input', { type: 'radio' }),
-                  React.createElement('input', { type: 'radio' })
                 )
               )
             )
@@ -480,8 +579,32 @@ var Hero = function (_React$Component) {
   return Hero;
 }(React.Component);
 
-//Home
+var Inventory = function Inventory(props) {
+  var inventoryImage = props.inventoryImage,
+      inventoryText = props.inventoryText;
 
+
+  return React.createElement(
+    'div',
+    { className: 'col-12 col-md-4' },
+    React.createElement(
+      'div',
+      { className: 'holder' },
+      React.createElement('div', { className: 'inventory-1', id: inventoryImage }),
+      React.createElement(
+        'div',
+        { className: 'white-holder text-center' },
+        React.createElement(
+          'h3',
+          null,
+          inventoryText
+        )
+      )
+    )
+  );
+};
+
+//Home
 
 var Home = function (_React$Component2) {
   _inherits(Home, _React$Component2);
@@ -497,6 +620,10 @@ var Home = function (_React$Component2) {
     value: function render() {
       var language = this.props.language;
 
+      var slogan = {
+        'en': 'We set up, you enjoy!',
+        'es': 'Nosotros lo instalamos, y ustedes los disfrutan!'
+      };
       return React.createElement(
         React.Fragment,
         null,
@@ -504,6 +631,26 @@ var Home = function (_React$Component2) {
           'div',
           { className: 'container-fluid' },
           React.createElement(Hero, { language: language })
+        ),
+        React.createElement(
+          'div',
+          { className: 'text-center mt-5 southern-text slogan' },
+          React.createElement(
+            'h4',
+            null,
+            slogan[language]
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'container-fluid inventory mt-5' },
+          React.createElement(
+            'div',
+            { className: 'inventory-list row d-flex justify-content-between' },
+            React.createElement(Inventory, { inventoryImage: 'inventory-one', inventoryText: language === 'es' ? 'Inflables' : 'Inflatables' }),
+            React.createElement(Inventory, { inventoryImage: 'inventory-two', inventoryText: 'Water Slides' }),
+            React.createElement(Inventory, { inventoryImage: 'inventory-three', inventoryText: language === 'es' ? 'Taquiza' : 'Taco Stand' })
+          )
         )
       );
     }

@@ -14,7 +14,7 @@ const services = [{
   price: '$125',
   image: 'hero-one',
   dimensions: '13.5ft x 13.5ft',
-  tags: ['inflatable', 'medium', 'covered', 'hoop'],
+  tags: ['inflatable', 'medium', 'covered', 'hoop', 'frontPage'],
 }, {
   id: 'SM-IN',
   name: {
@@ -28,7 +28,7 @@ const services = [{
   price: '$125',
   image: 'hero-two',
   dimensions: '13.5ft x 13.5ft',
-  tags: ['inflatable', 'medium', 'covered', 'hoop'],
+  tags: ['inflatable', 'medium', 'covered', 'hoop', 'frontPage'],
 }, {
   id: 'US-IN',
   name: {
@@ -37,12 +37,12 @@ const services = [{
   },
   description: {
     'en': 'Enter a magical land in this small but elegant unicorn themed inflatable.',
-    'es': 'Entra en una tierra magica en este pequeno pero elegante inflable unicornio.'
+    'es': 'Entra una tierra magica en este pequeno pero elegante inflable unicornio.'
   },
   price: '$100',
   image: 'hero-three',
   dimensions: '9.5ft x 9.5ft',
-  tags: ['inflatable', 'small', 'uncovered', 'slide'],
+  tags: ['inflatable', 'small', 'uncovered', 'slide', 'frontPage'],
 }, {
   id: 'UC-IN',
   name: {
@@ -98,7 +98,7 @@ const services = [{
   price: '$150/$200',
   image: '',
   dimensions: '15ft x 17ft',
-  tags: ['inflatable', 'medium', 'large', 'uncovered', 'slide', 'waterSlide'],
+  tags: ['inflatable', 'medium', 'large', 'uncovered', 'slide', 'water-slide'],
 }, {
   id: 'PP-IN',
   name: {
@@ -126,7 +126,7 @@ const services = [{
   price: '$200',
   image: '',
   dimensions: '18ft x 19ft',
-  tags: ['inflatable', 'large', 'covered', 'slide', 'waterSlide'],
+  tags: ['inflatable', 'large', 'covered', 'slide', 'water-slide'],
 }, {
   id: 'CW-WS',
   name: {
@@ -140,7 +140,7 @@ const services = [{
   price: '$200',
   image: '',
   dimensions: 'W:13.5ft x L:21.5ft x H:15ft',
-  tags: ['inflatable', 'large', 'uncovered', 'slide', 'waterSlide'],
+  tags: ['inflatable', 'large', 'uncovered', 'slide', 'water-slide'],
 }, {
   id: 'OW-WS',
   name: {
@@ -154,7 +154,7 @@ const services = [{
   price: '$225',
   image: '',
   dimensions: 'W:9ft10i x L:23.7ft x H:14ft',
-  tags: ['inflatable', 'large', 'uncovered', 'slide', 'waterSlide'],
+  tags: ['inflatable', 'large', 'uncovered', 'slide', 'water-slide'],
 }, {
   id: 'DW-WS',
   name: {
@@ -168,7 +168,7 @@ const services = [{
   price: '$275',
   image: '',
   dimensions: 'W:16.5ft x L:32.2ft x H:26.3ft',
-  tags: ['inflatable', 'x-large', 'uncovered', 'slide', 'waterSlide'],
+  tags: ['inflatable', 'x-large', 'uncovered', 'slide', 'water-slide'],
 }, {
   id: 'TNT-SP',
   name: {
@@ -280,13 +280,26 @@ const Layout = (props) => {
     navLngSelect: {
       'en': 'Language',
       'es': 'Idioma'
+    },
+    navServices: {
+      'en': 'Rentals',
+      'es': 'Renta'
+    },
+    footerAbout: {
+      'en': 'About',
+      'es': 'Sobre'
+    },
+    footerInflatables: {
+      'en': 'Inflatables',
+      'es': 'Inflables'
     }
   }
 
   return (
     <React.Fragment>
-      <nav className='navbar navbar-expand-lg bg-light'>
-        <div className='container'>
+      <nav className='navbar navbar-expand-lg'>
+        <div className='left-rounded-corner'></div>
+        <div className='container-fluid'>
           <Link className='navbar-brand' to='/'>
             <h1>Light Rodeo Rentals</h1>
           </Link>
@@ -297,6 +310,9 @@ const Layout = (props) => {
             <ul className='navbar-nav me-auto me-lg-0 ms-lg-auto mb-2 mb-lg-0 text-center'>
               <li className='nav-item'>
                 <Link className='nav-link' to='/'>{navItems.navHome[language]}</Link>
+              </li>
+              <li className='nav-item'>
+                <Link className='nav-link' to='/'>{navItems.navServices[language]}</Link>
               </li>
               <li className='nav-item dropdown'>
                 <Link className='nav-link dropdown-toggle' to='/' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -317,14 +333,33 @@ const Layout = (props) => {
             </ul>
           </div>
         </div>
+        <div className='right-rounded-corner'></div>
       </nav>
 
       {props.children}
       
-      <footer className='p-3 bg-light text-center'>
-        <div className='container'>
-          <div className='' id='legal'>
-            <span>&copy;2023 Mario Perez</span>
+      <footer className='p-3 text-center'>
+        <div className='container-fluid'>
+          <div className='row southern-text'>
+            <div className='col-3'>
+              <h3>{navItems.footerAbout[language]}</h3>
+            </div>
+            <div className='col-3'>
+              <h3>{navItems.footerInflatables[language]}</h3>
+            </div>
+            <div className='col-3'>
+              <h3>{navItems.footerAbout[language]}</h3>
+            </div>
+            <div className='col-3'>
+              <h3>{navItems.footerAbout[language]}</h3>
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-12'>
+              <div className='' id='legal'>
+                <span><small>&copy;2023 Mario Perez</small></span>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
@@ -337,38 +372,58 @@ class Hero extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      heroTimer: null,
       count: 0,
-      currentlyShowing: services[0],
+      frontPageInflatables: services.filter((inflatables) => { return inflatables.tags.includes('frontPage') }),
+      dots: [true, false, false]
+    }
+  }
+  
+  componentDidMount() {
+    if(!this.heroTimer)
+    this.heroTimer = setInterval(() => { this.heroSlider(this.state.count) }, 10000)
+  }
+
+  componentWillUnmount() {
+    if(this.heroTimer) {
+      window.clearInterval(this.heroTimer);
     }
   }
 
-  componentDidMount() {
-    setInterval(() => {this.changeHero(this.state.count)}, 5000);
+  heroSlider = (num) => {
+    num++
+    let setDots = [0, 1, 2];
+    this.setState({count: num, dots: setDots.map((val) => {return val === num % this.state.frontPageInflatables.length})})
+
   }
 
-  changeHero(count) {
-    console.log(count)
-    this.setState( {count: count + 1, currentlyShowing: services[count % 3] })
+  getDV = (e) => {
+    window.clearInterval(this.heroTimer);
+    const dataValue = e.target.getAttribute('data-value');
+    this.heroSlider(dataValue)
   }
   
   render() {
-    const { currentlyShowing } = this.state
-    const { name, description, image } = currentlyShowing
-    const { language } = this.props
+    const { language } = this.props;
+    const { frontPageInflatables, count, dots } = this.state
+    const { name, description, image } = frontPageInflatables[count % frontPageInflatables.length]
+
+
+    
     return (
-      <div className='row'>
-        <div className='col-12'>
+      <div className='row flex-nowrap scrollable-row'>
+        <div className='col-12' id='fadeAnimation' key={image}>
           <div className='d-flex align-items-end hero' id={image}>
             <div className='black-transparent text-white'>
               <div className='hero-descriptor pt-2'>
                 <div className='hero-text d-inline text-start'>
-                  <h5>{ name[language] }</h5>
-                  <h6 className='pt-2'>{ description[language] }</h6>
-                </div>
-                <div className='radio-buttons d-flex justify-content-center align-items-end'>
-                  <input type='radio' />
-                  <input type='radio' />
-                  <input type='radio' />
+                  <h5 className='southern-text'>{name[language]}</h5>
+                  <h6 className='pt-2'>{description[language]}</h6>
+                  <div className='radio-buttons d-flex justify-content-center align-items-end'>
+                    <span className={dots[0] ? 'active-dot' : 'dot'} data-value='-1' onClick={this.getDV}></span>
+                    <span className={dots[1] ? ' active-dot' : 'dot'} data-value='0' onClick={this.getDV}></span>
+                    <span className={dots[2] ? 'active-dot' : 'dot'} data-value='1' onClick={this.getDV}></span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -379,14 +434,44 @@ class Hero extends React.Component {
   }
 }
 
+const Inventory = (props) => {
+  const { inventoryImage, inventoryText } = props;
+
+  return(
+    <div className='col-12 col-md-4'>
+      <div className='holder'>
+        <div className='inventory-1' id={ inventoryImage }>
+        </div>
+        <div className='white-holder text-center'>
+          <h3>{ inventoryText }</h3>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 //Home
 class Home extends React.Component {
   render() {
     const { language } = this.props;
+    const slogan = {
+      'en': 'We set up, you enjoy!',
+      'es': 'Nosotros lo instalamos, y ustedes los disfrutan!',
+    }
     return (
       <React.Fragment>
         <div className='container-fluid'>
           <Hero language={ language }/>
+        </div>
+        <div className='text-center mt-5 southern-text slogan'>
+          <h4>{slogan[language]}</h4>
+        </div>
+        <div className='container-fluid inventory mt-5'>
+          <div className='inventory-list row d-flex justify-content-between'>
+            <Inventory inventoryImage='inventory-one' inventoryText={language === 'es' ? 'Inflables' : 'Inflatables'} />
+            <Inventory inventoryImage='inventory-two' inventoryText='Water Slides' />
+            <Inventory inventoryImage='inventory-three' inventoryText={language === 'es' ? 'Taquiza' : 'Taco Stand'} />
+          </div>
         </div>
       </React.Fragment>
     )
