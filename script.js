@@ -12,8 +12,276 @@ var _ReactRouterDOM = ReactRouterDOM,
     Link = _ReactRouterDOM.Link,
     Switch = _ReactRouterDOM.Switch;
 
-//Layout
 
+var services = [{
+  id: 'MM-IN',
+  name: {
+    'en': 'Micky Mouse Inflatable',
+    'es': 'Inflable Mickey Mouse'
+  },
+  description: {
+    'en': 'Get a taste of Disney Land with this 3D Micky and Minny Mouse Inflatable!',
+    'es': 'Toma un viaje a Disney Land con este inflable 3D de Micky y Minny Mouse. '
+  },
+  price: '$125',
+  image: 'hero-one',
+  dimensions: '13.5ft x 13.5ft',
+  tags: ['inflatable', 'medium', 'covered', 'hoop', 'frontPage']
+}, {
+  id: 'SM-IN',
+  name: {
+    'en': 'Spider-Man Inflatable',
+    'es': 'Inflable Spider-Man'
+  },
+  description: {
+    'en': 'Swing! Dive! And Jump through this Spider-Man themed inflatable!',
+    'es': 'Columpea! Bucea! Y salta a traves de este inflabe Spider-Man'
+  },
+  price: '$125',
+  image: 'hero-two',
+  dimensions: '13.5ft x 13.5ft',
+  tags: ['inflatable', 'medium', 'covered', 'hoop', 'frontPage']
+}, {
+  id: 'US-IN',
+  name: {
+    'en': 'Unicorn Inflatable',
+    'es': 'Inflable Unicornio'
+  },
+  description: {
+    'en': 'Enter a magical land in this small but elegant unicorn themed inflatable.',
+    'es': 'Entra una tierra magica en este pequeno pero elegante inflable unicornio.'
+  },
+  price: '$100',
+  image: 'hero-three',
+  dimensions: '9.5ft x 9.5ft',
+  tags: ['inflatable', 'small', 'uncovered', 'slide', 'frontPage']
+}, {
+  id: 'UC-IN',
+  name: {
+    'en': 'Unicorn Carriage Inflatable',
+    'es': 'Inflable Carruaje Unicornio'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$185',
+  image: '',
+  dimensions: '13.5ft x 21.5ft',
+  tags: ['inflatable', 'large', 'covered', 'slide']
+}, {
+  id: 'UP-IN',
+  name: {
+    'en': 'Unicorn Park Inflatable',
+    'es': 'Inflable Parque Unicornio'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$185',
+  image: '',
+  dimensions: '19.5ft x 19.5ft',
+  tags: ['inflatable', 'x-large', 'uncovered', 'slide', 'obstacles', 'playpen']
+}, {
+  id: 'PC-IN',
+  name: {
+    'en': 'Disney Princess Castle Inflatable',
+    'es': 'Inflable Castillo Disney Princesas'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$190',
+  image: '',
+  dimensions: '18.5ft x 18ft',
+  tags: ['inflatable', 'x-large', 'covered', 'slide', 'obstacles']
+}, {
+  id: 'TS-IN',
+  name: {
+    'en': 'Combo Toy Story Inflatable',
+    'es': 'Inflable Toy Story Combo'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$150/$200',
+  image: '',
+  dimensions: '15ft x 17ft',
+  tags: ['inflatable', 'medium', 'large', 'uncovered', 'slide', 'water-slide']
+}, {
+  id: 'PP-IN',
+  name: {
+    'en': 'Paw Patrol Inflatable',
+    'es': 'Inflable Paw Patrol'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$175',
+  image: '',
+  dimensions: '15ft x 17.5ft',
+  tags: ['inflatable', 'large', 'uncovered', 'slide', 'obstacles']
+}, {
+  id: 'CS-IN',
+  name: {
+    'en': 'Combo Mermaid Inflatable',
+    'es': 'Inflable Sirenita Combo'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$200',
+  image: '',
+  dimensions: '18ft x 19ft',
+  tags: ['inflatable', 'large', 'covered', 'slide', 'water-slide']
+}, {
+  id: 'CW-WS',
+  name: {
+    'en': 'Water Slide - Colors',
+    'es': 'Water Slide Colores'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$200',
+  image: '',
+  dimensions: 'W:13.5ft x L:21.5ft x H:15ft',
+  tags: ['inflatable', 'large', 'uncovered', 'slide', 'water-slide']
+}, {
+  id: 'OW-WS',
+  name: {
+    'en': 'Orange Water Slide',
+    'es': 'Water Slide Naranja'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$225',
+  image: '',
+  dimensions: 'W:9ft10i x L:23.7ft x H:14ft',
+  tags: ['inflatable', 'large', 'uncovered', 'slide', 'water-slide']
+}, {
+  id: 'DW-WS',
+  name: {
+    'en': 'Double Water Slide',
+    'es': 'Water Slide Doble'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$275',
+  image: '',
+  dimensions: 'W:16.5ft x L:32.2ft x H:26.3ft',
+  tags: ['inflatable', 'x-large', 'uncovered', 'slide', 'water-slide']
+}, {
+  id: 'TNT-SP',
+  name: {
+    'en': '10ft x 20ft Tent',
+    'es': '10ft x 20ft Carpas'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$200',
+  image: '',
+  dimensions: '10ft x 20ft',
+  tags: ['tent', 'shade', 'medium']
+}, {
+  id: 'TWT-SP',
+  name: {
+    'en': '20ft x 40ft Tent',
+    'es': '20ft x 40ft Carpas'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$400',
+  image: '',
+  dimensions: '20ft x 40ft',
+  tags: ['tent', 'shade', 'large']
+}, {
+  id: 'TBC-SP',
+  name: {
+    'en': 'Table with 6 Chairs Combo',
+    'es': 'Mesa con 6 Sillas Combo'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$12.50',
+  image: '',
+  dimensions: '6ft x 3ft',
+  tags: ['table', 'chair', 'supplement']
+}, {
+  id: 'PC-FD',
+  name: {
+    'en': 'Popcorn Machine',
+    'es': 'Maquina De Palomita'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$75',
+  image: '',
+  dimensions: '',
+  tags: ['food', 'stands']
+}, {
+  id: 'CC-FD',
+  name: {
+    'en': 'Cotton Candy Machine',
+    'es': 'Maquina de Algodon'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$75',
+  image: '',
+  dimensions: '',
+  tags: ['food', 'stands']
+}, {
+  id: 'IC-FD',
+  name: {
+    'en': 'Ice Cone Machine',
+    'es': 'Maquina de Raspados'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$75',
+  image: '',
+  dimensions: '',
+  tags: ['food', 'stands']
+}, {
+  id: 'TC-FD',
+  name: {
+    'en': 'Tacos',
+    'es': 'Taquiza'
+  },
+  description: {
+    'en': '',
+    'es': ''
+  },
+  price: '$10',
+  image: '',
+  dimensions: '',
+  tags: ['food', 'stands']
+}];
+
+//Layout
 var Layout = function Layout(props) {
   var language = props.language,
       languageChange = props.languageChange;
@@ -26,6 +294,18 @@ var Layout = function Layout(props) {
     navLngSelect: {
       'en': 'Language',
       'es': 'Idioma'
+    },
+    navServices: {
+      'en': 'Rentals',
+      'es': 'Renta'
+    },
+    footerAbout: {
+      'en': 'About',
+      'es': 'Sobre'
+    },
+    footerInflatables: {
+      'en': 'Inflatables',
+      'es': 'Inflables'
     }
   };
 
@@ -34,7 +314,8 @@ var Layout = function Layout(props) {
     null,
     React.createElement(
       'nav',
-      { className: 'navbar navbar-expand-lg bg-light' },
+      { className: 'navbar navbar-expand-lg' },
+      React.createElement('div', { className: 'left-rounded-corner' }),
       React.createElement(
         'div',
         { className: 'container-fluid' },
@@ -44,7 +325,7 @@ var Layout = function Layout(props) {
           React.createElement(
             'h1',
             null,
-            'Maple Enterprise, LLC.'
+            'Light Rodeo Rentals'
           )
         ),
         React.createElement(
@@ -65,6 +346,15 @@ var Layout = function Layout(props) {
                 Link,
                 { className: 'nav-link', to: '/' },
                 navItems.navHome[language]
+              )
+            ),
+            React.createElement(
+              'li',
+              { className: 'nav-item' },
+              React.createElement(
+                Link,
+                { className: 'nav-link', to: '/' },
+                navItems.navServices[language]
               )
             ),
             React.createElement(
@@ -101,26 +391,75 @@ var Layout = function Layout(props) {
             )
           )
         )
-      )
+      ),
+      React.createElement('div', { className: 'right-rounded-corner' })
     ),
-    React.createElement(
-      'div',
-      { className: 'container-fluid py-3' },
-      props.children
-    ),
+    props.children,
     React.createElement(
       'footer',
-      { className: 'p-3 bg-light text-center' },
+      { className: 'p-3 text-center' },
       React.createElement(
         'div',
         { className: 'container-fluid' },
         React.createElement(
           'div',
-          { className: '', id: 'legal' },
+          { className: 'row southern-text' },
           React.createElement(
-            'span',
-            null,
-            '\xA92023 Mario Perez'
+            'div',
+            { className: 'col-3' },
+            React.createElement(
+              'h3',
+              null,
+              navItems.footerAbout[language]
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-3' },
+            React.createElement(
+              'h3',
+              null,
+              navItems.footerInflatables[language]
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-3' },
+            React.createElement(
+              'h3',
+              null,
+              navItems.footerAbout[language]
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-3' },
+            React.createElement(
+              'h3',
+              null,
+              navItems.footerAbout[language]
+            )
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'row' },
+          React.createElement(
+            'div',
+            { className: 'col-12' },
+            React.createElement(
+              'div',
+              { className: '', id: 'legal' },
+              React.createElement(
+                'span',
+                null,
+                React.createElement(
+                  'small',
+                  null,
+                  '\xA92023 Mario Perez'
+                )
+              )
+            )
           )
         )
       )
@@ -128,22 +467,215 @@ var Layout = function Layout(props) {
   );
 };
 
+//Hero
+
+var Hero = function (_React$Component) {
+  _inherits(Hero, _React$Component);
+
+  function Hero(props) {
+    _classCallCheck(this, Hero);
+
+    var _this = _possibleConstructorReturn(this, (Hero.__proto__ || Object.getPrototypeOf(Hero)).call(this, props));
+
+    _this.heroSlider = function (num) {
+      num++;
+      var setDots = [0, 1, 2];
+      _this.setState({ count: num, dots: setDots.map(function (val) {
+          return val === num % _this.state.frontPageInflatables.length;
+        }) });
+    };
+
+    _this.getDV = function (e) {
+      window.clearInterval(_this.heroTimer);
+      var dataValue = e.target.getAttribute('data-value');
+      _this.heroSlider(dataValue);
+    };
+
+    _this.state = {
+      heroTimer: null,
+      count: 0,
+      frontPageInflatables: services.filter(function (inflatables) {
+        return inflatables.tags.includes('frontPage');
+      }),
+      dots: [true, false, false]
+    };
+    return _this;
+  }
+
+  _createClass(Hero, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      if (!this.heroTimer) this.heroTimer = setInterval(function () {
+        _this2.heroSlider(_this2.state.count);
+      }, 10000);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      if (this.heroTimer) {
+        window.clearInterval(this.heroTimer);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var language = this.props.language;
+      var _state = this.state,
+          frontPageInflatables = _state.frontPageInflatables,
+          count = _state.count,
+          dots = _state.dots;
+      var _frontPageInflatables = frontPageInflatables[count % frontPageInflatables.length],
+          name = _frontPageInflatables.name,
+          description = _frontPageInflatables.description,
+          image = _frontPageInflatables.image;
+
+
+      return React.createElement(
+        'div',
+        { className: 'row flex-nowrap scrollable-row' },
+        React.createElement(
+          'div',
+          { className: 'col-12', id: 'fadeAnimation', key: image },
+          React.createElement(
+            'div',
+            { className: 'd-flex align-items-end hero', id: image },
+            React.createElement(
+              'div',
+              { className: 'black-transparent text-white' },
+              React.createElement(
+                'div',
+                { className: 'hero-descriptor pt-2' },
+                React.createElement(
+                  'div',
+                  { className: 'hero-text d-inline text-start' },
+                  React.createElement(
+                    'h5',
+                    { className: 'southern-text' },
+                    name[language]
+                  ),
+                  React.createElement(
+                    'h6',
+                    { className: 'pt-2' },
+                    description[language]
+                  ),
+                  React.createElement(
+                    'div',
+                    { className: 'radio-buttons d-flex justify-content-center align-items-end' },
+                    React.createElement('span', { className: dots[0] ? 'active-dot' : 'dot', 'data-value': '-1', onClick: this.getDV }),
+                    React.createElement('span', { className: dots[1] ? ' active-dot' : 'dot', 'data-value': '0', onClick: this.getDV }),
+                    React.createElement('span', { className: dots[2] ? 'active-dot' : 'dot', 'data-value': '1', onClick: this.getDV })
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Hero;
+}(React.Component);
+
+var Inventory = function Inventory(props) {
+  var inventoryImage = props.inventoryImage,
+      inventoryText = props.inventoryText;
+
+
+  return React.createElement(
+    'div',
+    { className: 'col-12 col-md-4' },
+    React.createElement(
+      'div',
+      { className: 'holder' },
+      React.createElement('div', { className: 'inventory-1', id: inventoryImage }),
+      React.createElement(
+        'div',
+        { className: 'white-holder text-center' },
+        React.createElement(
+          'h3',
+          null,
+          inventoryText
+        )
+      )
+    )
+  );
+};
+
+//Home
+
+var Home = function (_React$Component2) {
+  _inherits(Home, _React$Component2);
+
+  function Home() {
+    _classCallCheck(this, Home);
+
+    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+  }
+
+  _createClass(Home, [{
+    key: 'render',
+    value: function render() {
+      var language = this.props.language;
+
+      var slogan = {
+        'en': 'We set up, you enjoy!',
+        'es': 'Nosotros lo instalamos, y ustedes los disfrutan!'
+      };
+      return React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(
+          'div',
+          { className: 'container-fluid' },
+          React.createElement(Hero, { language: language })
+        ),
+        React.createElement(
+          'div',
+          { className: 'text-center mt-5 southern-text slogan' },
+          React.createElement(
+            'h4',
+            null,
+            slogan[language]
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'container-fluid inventory mt-5' },
+          React.createElement(
+            'div',
+            { className: 'inventory-list row d-flex justify-content-between' },
+            React.createElement(Inventory, { inventoryImage: 'inventory-one', inventoryText: language === 'es' ? 'Inflables' : 'Inflatables' }),
+            React.createElement(Inventory, { inventoryImage: 'inventory-two', inventoryText: 'Water Slides' }),
+            React.createElement(Inventory, { inventoryImage: 'inventory-three', inventoryText: language === 'es' ? 'Taquiza' : 'Taco Stand' })
+          )
+        )
+      );
+    }
+  }]);
+
+  return Home;
+}(React.Component);
+
 //Output
 
-var App = function (_React$Component) {
-  _inherits(App, _React$Component);
+
+var App = function (_React$Component3) {
+  _inherits(App, _React$Component3);
 
   function App(props) {
     _classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+    var _this4 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _this.state = {
+    _this4.state = {
       language: 'es'
     };
 
-    _this.languageChange = _this.languageChange.bind(_this);
-    return _this;
+    _this4.languageChange = _this4.languageChange.bind(_this4);
+    return _this4;
   }
 
   _createClass(App, [{
@@ -166,12 +698,8 @@ var App = function (_React$Component) {
           React.createElement(
             Switch,
             null,
-            React.createElement(Route, { path: '/', exact: true, render: function render() {
-                return React.createElement(
-                  'h1',
-                  null,
-                  'Hello world'
-                );
+            React.createElement(Route, { path: '/', exact: true, render: function render(props) {
+                return React.createElement(Home, Object.assign({}, props, { language: language }));
               } }),
             React.createElement(Route, { render: function render() {
                 return React.createElement(
