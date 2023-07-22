@@ -270,215 +270,6 @@ const Router = ReactRouterDOM.HashRouter;
 const { Route, Link, Switch } = ReactRouterDOM;
 const { useState } = React;
 
-
-//Layout
-const Layout = (props) => {
-  const { language, languageChange } = props
-  const navItems = {
-    navHome: {
-      'en': 'Home',
-      'es': 'Inicio'
-    },
-    navLngSelect: {
-      'en': 'Language',
-      'es': 'Idioma'
-    },
-    navServices: {
-      'en': 'Rentals',
-      'es': 'Renta'
-    },
-    footerAbout: {
-      'en': 'About us',
-      'es': 'Sobre nosotros'
-    },
-    footerInflatables: {
-      'en': 'Inflatables',
-      'es': 'Inflables'
-    }
-  }
-
-  return (
-    <React.Fragment>
-      <nav className='navbar navbar-expand-lg'>
-        <div className='left-rounded-corner'></div>
-        <div className='container-fluid'>
-          <Link className='navbar-brand' to='/'>
-            <h1>Light Rodeo Rentals</h1>
-          </Link>
-          <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
-            <span className='navbar-toggler-icon'></span>
-          </button>
-          <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-            <ul className='navbar-nav me-auto me-lg-0 ms-lg-auto mb-2 mb-lg-0 text-center'>
-              <li className='nav-item'>
-                <Link className='nav-link' to='/'>{navItems.navHome[language]}</Link>
-              </li>
-              <li className='nav-item'>
-                <Link className='nav-link' to='/'>{navItems.navServices[language]}</Link>
-              </li>
-              <li className='nav-item dropdown'>
-                <Link className='nav-link dropdown-toggle' to='/' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                  {navItems.navLngSelect[language]}
-                </Link>
-                <ul className='dropdown-menu'>
-                  <li>
-                    <Link data-value='en' onClick={(e) => languageChange(e)} className='dropdown-item' to='/'>
-                      English
-                    </Link>
-                    <Link data-value='es' onClick={(e) => languageChange(e)}
-                      className='dropdown-item' to='/'>
-                      Espanol
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className='right-rounded-corner'></div>
-      </nav>
-
-      {props.children}
-
-      <footer className='mt-3 p-3 text-center'>
-        <div className='container-fluid'>
-          <div className='row southern-text'>
-            <div className='col-3'>
-              <h3>{navItems.footerAbout[language]}</h3>
-            </div>
-            <div className='col-3'>
-              <h3>{navItems.footerInflatables[language]}</h3>
-            </div>
-            <div className='col-3'>
-              <h3>{navItems.footerAbout[language]}</h3>
-            </div>
-            <div className='col-3'>
-              <h3>{navItems.footerAbout[language]}</h3>
-            </div>
-          </div>
-          <div className='row'>
-            <div className='col-12'>
-              <div className='' id='legal'>
-                <span><small>&copy;2023 Mario Perez</small></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </React.Fragment>
-  )
-}
-
-//Hero 
-class Hero extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      heroTimer: null,
-      count: 0,
-      frontPageInflatables: services.filter((inflatables) => { return inflatables.tags.includes('frontPage') }),
-      dots: [true, false, false]
-    }
-  }
-
-  componentDidMount() {
-    if (!this.heroTimer)
-      this.heroTimer = setInterval(() => { this.heroSlider(this.state.count) }, 10000)
-  }
-
-  componentWillUnmount() {
-    if (this.heroTimer) {
-      window.clearInterval(this.heroTimer);
-    }
-  }
-
-  heroSlider = (num) => {
-    num++
-    let setDots = [0, 1, 2];
-    this.setState({ count: num, dots: setDots.map((val) => { return val === num % this.state.frontPageInflatables.length }) })
-
-  }
-
-  getDV = (e) => {
-    window.clearInterval(this.heroTimer);
-    const dataValue = e.target.getAttribute('data-value');
-    this.heroSlider(dataValue)
-  }
-
-  render() {
-    const { language } = this.props;
-    const { frontPageInflatables, count, dots } = this.state
-    const { name, description, image } = frontPageInflatables[count % frontPageInflatables.length]
-
-
-
-    return (
-      <div className='row flex-nowrap scrollable-row'>
-        <div className='col-12' id='fadeAnimation' key={image}>
-          <div className='d-flex align-items-end hero' id={image}>
-            <div className='black-transparent text-white'>
-              <div className='hero-descriptor pt-2'>
-                <div className='hero-text d-inline text-start'>
-                  <h5 className='southern-text'>{name[language]}</h5>
-                  <h6 className='pt-2'>{description[language]}</h6>
-                  <div className='radio-buttons d-flex justify-content-center align-items-end'>
-                    <span className={dots[0] ? 'active-dot' : 'dot'} data-value='-1' onClick={this.getDV}></span>
-                    <span className={dots[1] ? ' active-dot' : 'dot'} data-value='0' onClick={this.getDV}></span>
-                    <span className={dots[2] ? 'active-dot' : 'dot'} data-value='1' onClick={this.getDV}></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-}
-
-const Inventory = (props) => {
-  const { inventoryImage, inventoryText } = props;
-
-  return (
-    <div className='col-12 col-md-4'>
-      <div className='holder'>
-        <div className='inventory-1' id={inventoryImage}>
-        </div>
-        <div className='white-holder text-center'>
-          <h3>{inventoryText}</h3>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-//Home
-const Home = (props) => {
-  const { language } = props;
-  const slogan = {
-    'en': 'Turn every party into an adventure!',
-    'es': 'Haz cada fiesta una aventura!'
-  }
-
-  return (
-    <React.Fragment>
-      <div className='container-fluid'>
-        <Hero language={ language } />
-        <div className='mt-5 southern-text slogan'>
-          <h4 className='ps-5'>{slogan[language]}</h4>
-        </div>
-      </div>
-      <div className='container-fluid inventory mt-5'>
-        <div className='inventory-list row d-flex justify-content-between'>
-          <Inventory inventoryImage='inventory-one' inventoryText={language === 'es' ? 'Inflables' : 'Inflatables'} />
-          <Inventory inventoryImage='inventory-two' inventoryText='Water Slides' />
-          <Inventory inventoryImage='inventory-three' inventoryText={language === 'es' ? 'Taquiza' : 'Taco Stand'} />
-        </div>
-      </div>
-    </React.Fragment>
-  )
-}
-
 //Output
 const App = () => {
   const [language, setLanguague] = useState('es');
@@ -487,19 +278,119 @@ const App = () => {
     setLanguague(e.target.value)
   }
 
+  //Home
+  const Home = (props) => {
+    const { language } = props;
+    const home = {
+      slogan: {
+        'en': 'Turn every party into an adventure!',
+        'es': 'Haz cada fiesta una aventura!'
+      },
+      button: {
+        'en': 'Start renting!',
+        'es': 'Empieza rentar!'
+      }
+    }
+
+    //Hero 
+    class Hero extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          heroTimer: null,
+          count: 0,
+          frontPageInflatables: services.filter((inflatables) => { return inflatables.tags.includes('frontPage') }),
+          dots: [true, false, false]
+        }
+      }
+
+      componentDidMount() {
+        if (!this.heroTimer)
+          this.heroTimer = setInterval(() => { this.heroSlider(this.state.count) }, 10000)
+      }
+
+      componentWillUnmount() {
+        if (this.heroTimer) {
+          window.clearInterval(this.heroTimer);
+        }
+      }
+
+      heroSlider = (num) => {
+        num++
+        let setDots = [0, 1, 2];
+        this.setState({ count: num, dots: setDots.map((val) => { return val === num % this.state.frontPageInflatables.length }) })
+
+      }
+
+      getDV = (e) => {
+        window.clearInterval(this.heroTimer);
+        const dataValue = e.target.getAttribute('data-value');
+        this.heroSlider(dataValue)
+      }
+
+      render() {
+        const { language } = this.props;
+        const { frontPageInflatables, count, dots } = this.state
+        const { name, description, image } = frontPageInflatables[count % frontPageInflatables.length]
+
+
+
+        return (
+          <div className='row flex-nowrap scrollable-row'>
+            <div className='col-12 justify-content-center' id='fadeAnimation' key={image}>
+              <Link to='/'>
+                <div className='d-flex align-items-end hero' id={image}>
+                  <div className='black-transparent text-white'>
+                    <div className='hero-descriptor pt-2'>
+                      <div className='hero-text d-inline text-start'>
+                        <h5 className='southern-text'>{name[language]}</h5>
+                        <h6 className='pt-2'>{description[language]}</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+              <div className='radio-buttons'>
+                <span className={dots[0] ? 'active-dot' : 'dot'} data-value='-1' onClick={this.getDV}></span>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    return (
+      <React.Fragment>
+        <div className='container-fluid'>
+          <Hero language={ language } />
+          <div className='row'>
+            <div className='col-12 col-md-6 text-center text-md-start southern-text'>
+              <h4>{home.slogan[language]}</h4>
+            </div>
+            <div className='col-12 col-md-6 text-center text-md-end'>
+              <Link className='btn btn-primary' to='/'><h4>{home.button[language]}</h4></Link>
+            </div>
+          </div>
+        </div>
+        <div className='container-fluid inventory mt-5'>
+          <div className='inventory-list row d-flex justify-content-between'>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
+
   return (
     <Router>
-      <Layout language={ language } languageChange={ changeLanguage }>
         <Switch>
           <Route path="/" exact render={(props) => <Home {...props} language={language} />} />
           <Route render={() => <h1>404 Not found</h1>} />
         </Switch>
-      </Layout>
     </Router>
   )
 }
 
 ReactDOM.render(
-  <App />,
+  <App />, 
   document.getElementById('root')
-);
+)
